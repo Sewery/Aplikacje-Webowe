@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Great - TV series fan website</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles_contact.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar__container">
+        <a href="./" id="navbar__title">The Great</a>
+        <div class="nav__dropdown-menu" id="dropdown-menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+        <ul class="menu">
+          <li>
+            <a href="./home.html" class="menu__links">Home</a>
+          </li>
+          <li>
+            <a href="./gallery.html" class="menu__links">Gallery</a>
+          </li>
+          <li>
+            <a href="./" class="menu__links">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <main class="main">
+      <div class="main__container">
+        <div class="card-wrapper">
+          <div class="stripe-decorative">
+            <i class="fa-solid fa-crown" id="icon_1"></i>
+            <i class="fa-solid fa-heart" id="icon_2"></i>
+            <i class="fa-solid fa-droplet" id="icon_3"></i>
+          </div>
+          <form class="form-wrapper">
+            <h1>Dear Empress</h1>
+            <div class="form-element">
+              <label for="email">Email</label>
+              <input type="text" id="email" />
+            </div>
+
+            <div class="form-element">
+              <label for="topic_message">Message Topic</label>
+              <select name="topic_message" id="topic-message__select">
+                <option value="">--Please choose an option--</option>
+                <option value="greetings">Greetings for author</option>
+                <option value="page_comment">Page comment</option>
+                <option value="question_to_author">Question to author</option>
+                <option value="bussines_inquiry">Bussiness inquiry</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-element" id="message_area_element">
+              <label for="message_area">Message</label>
+              <textarea id="message_area" rows="3" cols="30"> </textarea>
+            </div>
+            <div class="form-element">
+              <button type="submit">
+                <span class="fa-solid fa-heart"></span> Write to Us!
+                <i class="fa-solid fa-crown"></i>
+              </button>
+            </div>
+          </form>
+          <div class="stripe-decorative"></div>
+        </div>
+      </div>
+    </main>
+    <footer class="footer__container">
+      <p>© 2024 Seweryn Tasior</p>
+    </footer>
+    <script src="./script.js"></script>
+    <script
+      src="https://kit.fontawesome.com/dad530761b.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./script_contact.js"></script>
+  </body>
+</html>
