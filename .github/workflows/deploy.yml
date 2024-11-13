@@ -3,7 +3,7 @@ name: Project 1 website deploy
 on:
   push:
     branches:
-      - gh-pages-project-1'
+      - gh-pages-project-1
       - main
 
 jobs:
