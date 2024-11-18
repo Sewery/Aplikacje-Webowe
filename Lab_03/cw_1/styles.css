@@ -1,0 +1,27 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding:0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+.controls{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap ;
+}
+.controls button{
+    padding: 2rem;
+    background-color: aqua;
+    font-size: 2rem;
+}
+.stopwatch p{
+    font-size: xx-large;
+    padding: 2rem;
+}

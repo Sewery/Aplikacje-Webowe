@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Passoword generator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="form_wrapper">
+      <fieldset>
+        <legend>Selecting password preferences:</legend>
+        <label for="min_length">Minimal length of password:</label><br />
+        <input
+          type="number"
+          id="min_length"
+          name="min_length"
+          value="0"
+          required
+        /><br />
+
+        <label for="max_length">Maximal length of password:</label><br />
+        <input
+          type="number"
+          id="max_length"
+          name="max_length"
+          value="0"
+          required
+        /><br />
+
+        <input
+          type="checkbox"
+          id="checkbox_uppercase_letters"
+          name="password_requirements"
+          value="uppercase_letters"
+        />
+        <label for="checkbox_uppercase_letters"
+          >Should password have uppercase letters?</label
+        ><br />
+
+        <input
+          type="checkbox"
+          id="checkbox_special_chars"
+          name="password_requirements"
+          value="special_chars"
+        />
+        <label for="checkbox_special_chars"
+          >Should password have special characters?</label
+        ><br />
+        <button id="button_generator">Generate password</button>
+      </fieldset>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>
