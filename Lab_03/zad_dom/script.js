@@ -1,7 +1,19 @@
 const _spriteWidth = 2000 / 10;
 const _spriteHeight = 312;
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+function sleep(ms, signal) {
+  return new Promise((resolve, reject) => {
+    function done() {
+      resolve();
+      signal?.removeEventListener("abort", stop);
+    }
+    function stop() {
+      reject(this.reason);
+      clearTimeout(handle);
+    }
+    signal?.throwIfAborted();
+    const handle = setTimeout(done, ms);
+    signal?.addEventListener("abort", stop);
+  });
 }
 const gameBoard = document.getElementById("game_board");
 const spawnerElement = document.getElementById("spawner");
@@ -9,6 +21,7 @@ const scoreEndElement = document.getElementById("span_end_score");
 const currentScoreElement = document.getElementById("span_current_score");
 const popUpElement = document.getElementById("popup");
 const heartsElement = document.getElementById("hearts_wrapper");
+const audio = document.getElementById("audio-end");
 const cursorImg = new Image();
 cursorImg.src = "./images/aim.png";
 function createFullHeartImg() {
@@ -108,6 +121,7 @@ class Zombie {
     this.isHit = true;
   }
 }
+let controller = new AbortController();
 let isRunning = true;
 let currenthearts = 3;
 let currentScore = 0;
@@ -120,7 +134,7 @@ gameBoard.onclick = () => {
 };
 async function createZombies(spriteImg) {
   let currentZombies = 0;
-  let threshold = 20;
+  let threshold = 17;
   while (isRunning) {
     const numberSpawnZombie = Math.floor(Math.random() * (8 - 1)) + 1; // [1,8] in miliseconds
     const delayToSpawn = Math.floor(Math.random() * (500 - 50)) + 50; // [50,500] in miliseconds
@@ -130,14 +144,18 @@ async function createZombies(spriteImg) {
         window.innerHeight -
         scaleZombie * 312 -
         (Math.floor(Math.random() * (200 - 50)) + 50);
-      const zombieSpeed = Math.random() * (6 - 2) + 2;
-      await sleep(delayToSpawn);
+      const zombieSpeed = Math.random() * (5 - 1) + 1;
+      await sleep(delayToSpawn, controller.signal).catch((err) =>
+        console.error("Sleep spawb aborted:", err.message)
+      );
       currentZombies++;
       if (currentZombies == threshold) {
-        await sleep(8000).then(() => {
-          currentZombies = 0;
-          threshold += 5;
-        });
+        await sleep(8000, controller.signal)
+          .then(() => {
+            currentZombies = 0;
+            threshold += 5;
+          })
+          .catch((err) => console.error("Sleep wave aborted:", err.message));
       } else {
         //alert(zombieSpeed);
         zombieList.push(
@@ -173,6 +191,8 @@ function startGame() {
 }
 function stopGame() {
   cancelAnimationFrame(animationFrameId);
+  controller.abort();
+  controller = new AbortController();
   isRunning = false;
   scoreEndElement.textContent = String(currentScore).padStart(5, "0");
   currentScoreElement.textContent = String(currentScore).padStart(5, "0");
@@ -184,6 +204,11 @@ function stopGame() {
   while (spawnerElement.hasChildNodes()) {
     spawnerElement.removeChild(spawnerElement.firstChild);
   }
+  audio.currentTime = 0;
+  audio.play().catch((error) => {
+    console.log("Unable to play the video, User has not interacted yet.");
+  });
+  audio.style.display = "none";
 }
 function drawHearts() {
   switch (currenthearts) {
@@ -231,6 +256,7 @@ function animate() {
 }
 const playAgain = document.getElementById("btn_play_again");
 playAgain.onclick = () => {
+  audio.pause();
   startGame();
 };
 startGame();
