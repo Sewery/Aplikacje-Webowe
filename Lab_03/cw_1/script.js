@@ -16,15 +16,16 @@ stopButton.onclick = function () {
 };
 resetButton.onclick = function () {
   window.clearInterval(timerVariable);
-  currSeconds = "0s";
+  currSeconds = 0;
   currMinutes = "";
   timeMinutes.innerHTML = currMinutes;
-  timeSeconds.innerHTML = currSeconds;
+  timeSeconds.innerHTML = currSeconds + "s";
 };
 function startTimer() {
   currSeconds++;
   if (currSeconds >= 60) {
     currSeconds = 0;
+    if (currMinutes === "") currMinutes = 0;
     currMinutes++;
   }
   if (currMinutes >= 1) timeMinutes.innerHTML = currMinutes + "min ";

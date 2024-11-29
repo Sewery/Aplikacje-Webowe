@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>Canvas tutorial</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      const _spriteWidth = 2000 / 10;
+      const _spriteHeight = 312;
+
+      class Zombie {
+        constructor({
+          name,
+          speedX,
+          staggerFrames,
+          scaleSize,
+          spriteWidth,
+          spriteHeight,
+          posX,
+          posY,
+        }) {
+          this.name = name;
+          this.speedX = speedX;
+          this.staggerFrames = staggerFrames;
+          this.scaleSize = scaleSize;
+          this.spriteWidth = spriteWidth;
+          this.spriteHeight = spriteHeight;
+          this.posX = posX;
+          this.posY = posY;
+          this.numberOfSpriteFrames = 10;
+          this.currentSpriteFrame = 0;
+          this.canvas = document.createElement("canvas");
+          this.ctx = this.canvas.getContext("2d");
+          this.canvas.width = spriteWidth * scaleSize;
+          this.canvas.height = spriteHeight * scaleSize;
+          this.canvas.style.position = "absolute";
+          this.canvas.style.left = `${posX}px`;
+          this.canvas.style.top = `${posY}px`;
+          this.isGone = false;
+          this.position = 0;
+          this.img = new Image();
+          this.img.src = "./images/walkingdead.png";
+          document.body.appendChild(this.canvas);
+          this.isHit = false;
+          this.canvas.addEventListener("click", () => this.hit());
+        }
+        start() {
+          this.img.onload = () => {
+            this.animate();
+          };
+        }
+        animate() {
+          this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+          this.position =
+            Math.floor(this.currentSpriteFrame / this.staggerFrames) %
+            this.numberOfSpriteFrames;
+          if (this.posX < -this.spriteWidth * this.scaleSize) {
+            this.canvas.style.visibility = "hidden";
+            this.isGone = true;
+            return;
+          }
+          this.posX += this.speedX;
+          this.posY = this.newPosY;
+          this.canvas.style.left = `${this.posX}px`;
+          this.canvas.style.top = `${this.posY}px`;
+          this.draw();
+          this.currentSpriteFrame++;
+          requestAnimationFrame(() => this.animate());
+        }
+        draw() {
+          this.ctx.drawImage(
+            this.img,
+            this.position * this.spriteWidth,
+            0,
+            this.spriteWidth,
+            this.spriteHeight,
+            0,
+            0,
+            this.spriteWidth * this.scaleSize,
+            this.spriteHeight * this.scaleSize
+          );
+        }
+        hit() {
+          alert("Trafiony");
+          this.canvas.style.visibility = "hidden";
+          this.isGone = true;
+          this.isHit = true;
+        }
+      }
+      const zombie1 = new Zombie({
+        name: "zombie1",
+        speedX: -6.0,
+        staggerFrames: 5,
+        scaleSize: 1.0,
+        spriteWidth: _spriteWidth,
+        spriteHeight: _spriteHeight,
+        posX: window.innerWidth,
+        posY: window.innerHeight - 312,
+      });
+      zombie1.start();
+    </script>
+  </body>
+</html>

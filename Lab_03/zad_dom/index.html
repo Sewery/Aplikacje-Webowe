@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="popup" display="none">
+      <div class="popup-wrapper">
+        <audio
+          id="audio-end"
+          autoplay="true"
+          src="./images/sad-music.mp3"
+          type="audio/mp3"
+          loop
+        ></audio>
+        <p>Your score:</p>
+        <br />
+        <p id="span_end_score">0000</p>
+        <p>Do you want to try again?</p>
+        <button type="submit" id="btn_play_again">Play again</button>
+      </div>
+    </div>
+    <div id="game_board">
+      <p id="span_current_score">0000</p>
+      <div id="spawner"></div>
+      <div id="hearts_wrapper"></div>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>
