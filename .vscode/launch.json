@@ -1,0 +1,21 @@
+{
+  "configurations": [
+    {
+      "name": "Flask",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "flask",
+      "env": {
+        "FLASK_APP": "./app.py", // Replace 'app.py' with the name of your entry file
+        "FLASK_ENV": "development" // Enables debug mode
+      },
+      "args": [
+        "run",
+        "--no-debugger", // Optional: Disable Werkzeug debugger (use VS Code's debugger)
+        "--no-reload" // Optional: Disable auto-reload (handled by VS Code)
+      ],
+      "jinja": true, // Enable Jinja2 template debugging
+      "justMyCode": true
+    }
+  ]
+}
