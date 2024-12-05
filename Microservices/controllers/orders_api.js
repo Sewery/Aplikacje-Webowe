@@ -13,6 +13,9 @@ ordersApi.post("/", async (req, res) => {
   const authRes = await auth.authenticate(req, res);
   if (authRes != null) return;
   const result = await db.createOrder(req.body);
+  if (result == null) {
+    return res.status(404).json({ error: "incorrect order details" });
+  }
   res.status(201).json({ result });
 });
 ordersApi.delete("/:id", async (req, res) => {

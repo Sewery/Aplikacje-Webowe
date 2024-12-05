@@ -1,21 +1,26 @@
-// const knex = require("./knex");
-const { Order } = require("./db");
+const { Order, Book, User } = require("./db");
 function createOrder(order) {
-  return Order.create(order);
-  // return knex("orders").insert(order);
+  return Book.findOne({ where: { book_id: order.book_id } })
+    .then((value) => {
+      if (value != null)
+        return User.findOne({ where: { user_id: order.user_id } });
+      return null;
+    })
+    .then((value) => {
+      console.log(value);
+      if (value != null) return Order.create(order);
+      return null;
+    });
 }
 
 function getOrdersByUserId(userId) {
   return Order.findAll({ where: { user_id: userId } });
-  // return knex("orders").select("*").where("userId", userId);;
 }
 function deleteOrder(orderId) {
   return Order.destroy({ where: { order_id: orderId } });
-  // return knex("orders").where("order_id", orderId).del();
 }
 function patchOrder(orderId, order) {
   return Order.update(order, { where: { order_id: orderId } });
-  // return knex("orders").where("order_id", orderId).del();
 }
 module.exports = {
   createOrder,
