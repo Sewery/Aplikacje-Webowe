@@ -1,4 +1,4 @@
-const db = require("../db/users");
+const db = require("../services/users");
 const auth = require("../auth");
 var express = require("express");
 

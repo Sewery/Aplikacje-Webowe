@@ -1,4 +1,4 @@
-const db = require("../db/orders");
+const db = require("../services/orders");
 const auth = require("../auth");
 var express = require("express");
 

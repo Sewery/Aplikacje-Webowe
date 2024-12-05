@@ -15,7 +15,6 @@ const Book = sequelize.define(
   { tableName: "books", timestamps: false, underscored: true }
 );
 
-// Define the User model
 const User = sequelize.define(
   "User",
   {
@@ -26,7 +25,6 @@ const User = sequelize.define(
   { tableName: "users", timestamps: false }
 );
 
-// Define the Order model
 const Order = sequelize.define(
   "Order",
   {

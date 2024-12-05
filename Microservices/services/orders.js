@@ -1,5 +1,5 @@
 // const knex = require("./knex");
-const { Order } = require("./server");
+const { Order } = require("./db");
 function createOrder(order) {
   return Order.create(order);
   // return knex("orders").insert(order);

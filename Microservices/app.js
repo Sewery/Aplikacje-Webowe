@@ -1,5 +1,5 @@
 const express = require("express");
-const server = require("./db/server");
+const db = require("./services/db");
 const app = express();
 const port = 3000;
 const bodyParser = require("body-parser");
@@ -12,16 +12,14 @@ app.use("/api", require("./controllers/users_api"));
 
 (async () => {
   try {
-    // Sync database
-    await server.sequelize.sync(); // Adjust database schema to match models
+    await db.sequelize.sync();
     console.log("Database synced successfully.");
 
-    // Start the server
     app.listen(port, () => {
-      console.log(`Server running at http://localhost:${port}`);
+      console.log(`db running at http://localhost:${port}`);
     });
   } catch (error) {
     console.error("Failed to sync database:", error);
-    process.exit(1); // Exit if the database fails to sync
+    process.exit(1);
   }
 })();

@@ -1,4 +1,4 @@
-const db = require("../db/books");
+const db = require("../services/books");
 const auth = require("../auth");
 var express = require("express");
 var booksApi = express.Router();

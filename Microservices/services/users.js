@@ -1,4 +1,4 @@
-const { User } = require("./server");
+const { User } = require("./db");
 function getAllUsers() {
   return User.findAll();
 }

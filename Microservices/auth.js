@@ -1,4 +1,4 @@
-const db = require("./db/users");
+const db = require("./services/users");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const JWT_KEY = process.env.JWT_SECRET;
