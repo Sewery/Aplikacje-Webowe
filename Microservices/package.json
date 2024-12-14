@@ -2,15 +2,21 @@
   "name": "microservices",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "./gateway-service/app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "concurrently \"npm run orders\" \"npm run books\" \"npm run users\"",
+    "gateway": "nodemon ./gateway-service/app.js",
+    "orders": "nodemon ./orders-service/orders_api.js",
+    "books": "nodemon ./books-service/books_api.js",
+    "users": "nodemon ./users-service/users_api.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Seweryn Tasior",
   "license": "ISC",
+  "type": "module",
   "dependencies": {
     "@sequelize/sqlite3": "^7.0.0-alpha.43",
+    "axios": "^1.7.9",
     "body-parser": "^1.20.3",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
@@ -19,5 +25,8 @@
     "sequelize": "^6.37.5",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
   }
 }

@@ -1,4 +1,5 @@
-const { Book, Order } = require("./db");
+import db from "../db.js";
+const { Book, Order } = db;
 
 function createBook(book) {
   return Book.create(book);
@@ -17,7 +18,7 @@ function deleteBook(bookId) {
   );
 }
 
-module.exports = {
+export default {
   createBook,
   getAllBooks,
   getBookById,

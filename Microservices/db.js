@@ -1,4 +1,4 @@
-const { Sequelize, DataTypes, Op, Model } = require("sequelize");
+import { Sequelize, DataTypes, Op, Model } from "sequelize";
 const sequelize = new Sequelize({
   dialect: "sqlite",
   storage:
@@ -49,4 +49,4 @@ User.hasMany(Order, { foreignKey: "user_id" });
 Order.belongsTo(Book, { foreignKey: "book_id", onDelete: "cascade" });
 Order.belongsTo(User, { foreignKey: "user_id", onDelete: "cascade" });
 
-module.exports = { sequelize, Book, Order, User };
+export default { sequelize, Book, Order, User };

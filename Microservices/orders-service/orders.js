@@ -1,4 +1,5 @@
-const { Order, Book, User } = require("./db");
+import db from "../db.js";
+const { Order, Book, User } = db;
 function createOrder(order) {
   return Book.findOne({ where: { book_id: order.book_id } })
     .then((value) => {
@@ -22,7 +23,7 @@ function deleteOrder(orderId) {
 function patchOrder(orderId, order) {
   return Order.update(order, { where: { order_id: orderId } });
 }
-module.exports = {
+export default {
   createOrder,
   getOrdersByUserId,
   patchOrder,

@@ -1,6 +1,8 @@
-const db = require("./services/users");
-const jwt = require("jsonwebtoken");
-require("dotenv").config();
+import db from "./users-service/users.js";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
 const JWT_KEY = process.env.JWT_SECRET;
 
 function createToken(user) {
@@ -54,7 +56,7 @@ async function authenticate(req, res) {
   }
   return null;
 }
-module.exports = {
+export default {
   createToken,
   validateToken,
   authenticate,

@@ -1,4 +1,5 @@
-const { User } = require("./db");
+import db from "../db.js";
+const { User } = db;
 function getAllUsers() {
   return User.findAll();
 }
@@ -20,7 +21,7 @@ function loginUser(user) {
 function findUserById(userid) {
   return User.findByPk(userid);
 }
-module.exports = {
+export default {
   createUser,
   loginUser,
   findUserById,
